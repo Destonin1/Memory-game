@@ -8,28 +8,46 @@ const App = () => {
   const [bestScore, setBestScore] = useState(0);
   const [clickedCards, setclickedCards] = useState([]);
 
-  const clickCard = (id) => {
+  let canClick = true;
+
+  const clickCard = (e,id) => {
     const wasClicked = clickedCards.includes(id);
 
-    if(wasClicked) {
-      setclickedCards([]);
-      setScore(0);
+    if(wasClicked && canClick) {
+      e.currentTarget.style.boxShadow = '0 0 40px red';
+      canClick = false;
+      setTimeout(() => clickedWrong(id), 200)
     }
-    else {
-      setclickedCards([...clickedCards, id])
+    else if(canClick) {
+      e.currentTarget.style.boxShadow = '0 0 40px green';
+      canClick = false;
+      setTimeout(() => clickedRight(id), 200)
+    }
+  }
+
+  const clickedRight = (id) => {
+    setclickedCards([...clickedCards, id])
       if(score + 1 > bestScore){
         setBestScore(score + 1);
       }
       setScore(score + 1);
-    }
+  }
+
+  const clickedWrong = () => {
+    setclickedCards([]);
+    setScore(0);
   }
   
   return (
     <div className="container">
-      <Score
-            score = {score}
-            bestScore = {bestScore}
-        />
+      <div className='header'>
+        <div className='game-title'>Memory game</div>
+        <div className='tip'>Do not click twice on the same card to get score.</div>
+        <Score
+              score = {score}
+              bestScore = {bestScore}
+          />
+      </div>
       <Cards 
         onClick = {clickCard}
       />
