@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { useState, useEffect ,useRef } from 'react'
+import { gsap } from "gsap";
 import Cards from './components/Cards'
 import Score from './components/Score'
 
@@ -8,6 +9,8 @@ const App = () => {
   const [bestScore, setBestScore] = useState(0);
   const [clickedCards, setclickedCards] = useState([]);
 
+  const titleRef = useRef();
+  const tipRef = useRef();
   let canClick = true;
 
   const clickCard = (e,id) => {
@@ -16,7 +19,7 @@ const App = () => {
     if(wasClicked && canClick) {
       e.currentTarget.style.boxShadow = '0 0 40px red';
       canClick = false;
-      setTimeout(() => clickedWrong(id), 200)
+      setTimeout(() => clickedWrong(e), 200)
     }
     else if(canClick) {
       e.currentTarget.style.boxShadow = '0 0 40px green';
@@ -37,12 +40,17 @@ const App = () => {
     setclickedCards([]);
     setScore(0);
   }
+
+  useEffect(() => {
+    gsap.from(titleRef.current, { y: -100 });
+    gsap.from(tipRef.current, { x: -1000 });
+  },[]);
   
   return (
     <div className="container">
       <div className='header'>
-        <div className='game-title'>Memory game</div>
-        <div className='tip'>Do not click twice on the same card to get score.</div>
+        <div className='game-title' ref={titleRef}>Memory game</div>
+        <div className='tip' ref={tipRef}>Do not click twice on the same card to get score.</div>
         <Score
               score = {score}
               bestScore = {bestScore}

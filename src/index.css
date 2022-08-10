@@ -13,7 +13,7 @@ code {
 }
 
 .container {
-  height: 100vh;
+  min-height: 100vh;
   background: linear-gradient(rgba(9, 9, 240, 0.5), rgba(17, 2, 58, 0.5));
 }
 
@@ -53,23 +53,24 @@ code {
 
 .cards-wrap {
   width: 80%;
-  margin: 50px auto;
+  margin: 0 auto;
+  padding: 50px;
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
   flex-wrap: wrap;
-  gap: 20px;
+  gap: 30px;
 }
 
 .cards__item {
-  width: 150px;
-  height: 100px;
-  padding: 50px;
+  width: 230px;
+  height: 190px;
   border: 1px solid #000;
   border-radius: 10px;
   text-align: center;
   cursor: pointer;
   background-color: #fff;
+  position: relative;
 }
 
 .cards__item:hover {
@@ -77,15 +78,103 @@ code {
 }
 
 .cards__text {
-  text-align: center;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
   font-weight: 700;
   font-size: 48px;
-  line-height: 90px;
-  display: block;
+  line-height: 180px;
   -webkit-touch-callout: none; /* iOS Safari */
   -webkit-user-select: none;   /* Chrome/Safari/Opera */
   -khtml-user-select: none;    /* Konqueror */
   -moz-user-select: none;      /* Firefox */
   -ms-user-select: none;       /* Internet Explorer/Edge */
   user-select: none;
+}
+
+@media screen and (max-width: 1601px) {
+
+  .cards-wrap {
+    width: 90%;
+  }
+}
+
+@media screen and (max-width: 1535px) {
+
+  .cards__item {
+    width: 210px;
+    height: 165px;
+  }
+ 
+  .cards__text {
+    font-size: 44px;
+    line-height: 165px;
+  }
+}
+
+@media screen and (max-width: 1320px) {
+
+  .container {
+    padding-bottom: 50px;
+  }
+}
+
+@media screen and (max-width: 1050px) {
+
+  .game-title {
+    font-size: 36px;
+  }
+
+  .tip {
+    position: inherit;
+    text-align: center;
+    margin: 0 auto;
+    width: auto;
+    font-size: 20px;
+    padding-bottom: 20px;
+  }
+
+  .score-wrap {
+    padding: 0 0 20px 0;
+  }
+
+  .present-score, .best-score {
+    font-size: 24px;
+  }
+
+  .cards-wrap {
+    width: 90%;
+    padding: 0;
+  }
+}
+
+@media screen and (max-width: 775px) {
+
+  .cards__item {
+    width: 180px;
+    height: 140px;
+  }
+ 
+  .cards__text {
+    line-height: 140px;
+  }
+}
+
+@media screen and (max-width: 450px) {
+
+  .tip {
+    width: 90%;
+  }
+
+  .cards__item {
+    width: 140px;
+    height: 120px;
+  }
+ 
+  .cards__text {
+    font-size: 30px;
+    line-height: 118px;
+  }
 }

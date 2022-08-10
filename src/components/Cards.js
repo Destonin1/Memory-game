@@ -8,7 +8,7 @@ const Cards = (props) => {
   const texts   = ['red','blue','green','yellow','black','orange','brown','pink','purple','gray'];
   const colors  = ['#ff2400','#6600ff','#00ff00','#eeff00','#000','#ff8500','#ab6b5b','#ffaaaa','#650065','#8d847f'];
 
-  const boxRef = useRef();
+  const cardsRef = useRef();
 
   const [arrShuffle, setArrShuffle] = useState([]);
 
@@ -37,11 +37,11 @@ const Cards = (props) => {
       createArr()
     }
     Shuffle(arrShuffle);
-    gsap.from(boxRef.current, { y: 50 });
+    gsap.from(cardsRef.current, { y: 50 });
   });
 
   return (
-    <div className="cards-wrap" ref={boxRef}>
+    <div className="cards-wrap" ref={cardsRef}>
         {
           arrShuffle.map(cardItem => (
               <Card 
